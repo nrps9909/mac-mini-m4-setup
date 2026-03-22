@@ -131,8 +131,8 @@ you must first create a LINE Official Account, then enable Messaging API on it.
 
 Update `~/.openclaw/.env`:
 ```bash
-LINE_CHANNEL_SECRET=<paste channel secret>
-LINE_CHANNEL_ACCESS_TOKEN=<paste channel access token>
+export LINE_CHANNEL_SECRET=<paste channel secret>
+export LINE_CHANNEL_ACCESS_TOKEN=<paste channel access token>
 ```
 
 Re-source:

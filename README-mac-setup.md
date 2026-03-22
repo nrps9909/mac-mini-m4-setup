@@ -5,7 +5,7 @@
 | 項目 | 需求 |
 |------|------|
 | 硬體 | Mac Mini M4 Pro (24GB Unified Memory / 512GB SSD) |
-| macOS | Sonoma 15+ 或 Sequoia 16+ |
+| macOS | 14 (Sonoma) 以上 |
 | 網路 | 穩定的網路連線（安裝過程需下載約 15GB） |
 
 ## 架構圖
@@ -106,7 +106,7 @@ bash install-mac.sh
 | 查看所有服務 | `systemctl status` | `pm2 status` |
 | 重啟 OpenClaw | `systemctl --user restart openclaw-gateway` | `pm2 restart openclaw-gateway` |
 | 重啟 LINE Proxy | `systemctl restart line-webhook-proxy` | `pm2 restart line-webhook-proxy` |
-| 重啟 Ollama | `systemctl restart ollama` | `brew services restart ollama` 或重開 Ollama.app |
+| 重啟 Ollama | `systemctl restart ollama` | `open -a Ollama`（或 `pkill -x Ollama; sleep 2; open -a Ollama`） |
 | 重啟 Cloudflare Tunnel | `systemctl restart cloudflared-tunnel` | `launchctl load ~/Library/LaunchAgents/com.cloudflare.cloudflared.plist` |
 | 重啟 SearXNG | `docker restart searxng` | `docker restart searxng` |
 | 查看 logs | `journalctl -u ...` | `pm2 logs` |
