@@ -1,0 +1,231 @@
+{
+  "meta": {
+    "lastTouchedVersion": "",
+    "lastTouchedAt": ""
+  },
+  "wizard": {},
+  "auth": {
+    "profiles": {}
+  },
+  "models": {
+    "providers": {
+      "anthropic": {
+        "baseUrl": "https://api.anthropic.com",
+        "apiKey": "${ANTHROPIC_API_KEY}",
+        "api": "anthropic-messages",
+        "models": [
+          {
+            "id": "claude-opus-4-6",
+            "name": "Claude Opus 4.6",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 15,
+              "output": 75,
+              "cacheRead": 1.5,
+              "cacheWrite": 18.75
+            },
+            "contextWindow": 1000000,
+            "maxTokens": 128000
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "anthropic/claude-opus-4-6",
+        "fallbacks": []
+      },
+      "models": {
+        "anthropic/claude-opus-4-6": {
+          "alias": "claude",
+          "params": {
+            "streaming": true,
+            "cacheRetention": "long",
+            "thinking": "adaptive",
+            "context1m": true
+          }
+        }
+      },
+      "workspace": "/Users/USERNAME/.openclaw/workspace",
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "blockStreamingDefault": "on",
+      "blockStreamingBreak": "text_end",
+      "blockStreamingCoalesce": {
+        "minChars": 200,
+        "maxChars": 3500,
+        "idleMs": 5000
+      },
+      "timeoutSeconds": 3600,
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 2,
+        "model": "anthropic/claude-opus-4-6"
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "default": true
+      }
+    ]
+  },
+  "tools": {
+    "profile": "coding",
+    "web": {
+      "search": {
+        "enabled": false
+      },
+      "fetch": {
+        "enabled": true
+      }
+    }
+  },
+  "bindings": [],
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "session": {
+    "dmScope": "per-peer",
+    "reset": {
+      "mode": "daily",
+      "atHour": 4,
+      "idleMinutes": 120
+    },
+    "threadBindings": {
+      "enabled": true,
+      "idleHours": 24,
+      "maxAgeHours": 0
+    }
+  },
+  "hooks": {
+    "enabled": true,
+    "path": "/hooks",
+    "token": "${HOOKS_SECRET}",
+    "mappings": [],
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "boot-md": {
+          "enabled": true
+        },
+        "bootstrap-extra-files": {
+          "enabled": true
+        },
+        "command-logger": {
+          "enabled": true
+        },
+        "session-memory": {
+          "enabled": true
+        },
+        "self-improvement": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "pairing",
+      "botToken": "${TELEGRAM_BOT_TOKEN}",
+      "allowFrom": [],
+      "groupPolicy": "open",
+      "streaming": "off",
+      "textChunkLimit": 3500
+    },
+    "line": {
+      "enabled": true,
+      "channelAccessToken": "${LINE_CHANNEL_ACCESS_TOKEN}",
+      "channelSecret": "${LINE_CHANNEL_SECRET}",
+      "dmPolicy": "pairing",
+      "groupPolicy": "open",
+      "streaming": "off",
+      "textChunkLimit": 5000
+    }
+  },
+  "browser": {
+    "enabled": true,
+    "headless": true,
+    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "profiles": {
+      "chrome-relay": {
+        "driver": "existing-session",
+        "cdpUrl": "http://127.0.0.1:0",
+        "color": "#4285F4"
+      }
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "password"
+    },
+    "channelHealthCheckMinutes": 5,
+    "tailscale": {
+      "mode": "serve",
+      "resetOnExit": false
+    },
+    "http": {
+      "endpoints": {
+        "chatCompletions": {
+          "enabled": true
+        }
+      }
+    },
+    "nodes": {
+      "denyCommands": [
+        "camera.snap",
+        "camera.clip",
+        "screen.record",
+        "contacts.add",
+        "calendar.add",
+        "reminders.add",
+        "sms.send"
+      ]
+    }
+  },
+  "skills": {
+    "install": {
+      "nodeManager": "npm"
+    }
+  },
+  "plugins": {
+    "enabled": true,
+    "allow": [
+      "telegram",
+      "line",
+      "openclaw-searxng"
+    ],
+    "entries": {
+      "telegram": {
+        "enabled": true
+      },
+      "line": {
+        "enabled": true
+      },
+      "openclaw-searxng": {
+        "enabled": true,
+        "config": {
+          "baseUrl": "http://127.0.0.1:8888"
+        }
+      }
+    },
+    "installs": {}
+  }
+}
