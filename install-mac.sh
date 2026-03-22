@@ -210,7 +210,15 @@ fi
 # Setup pm2 startup (auto-start on boot)
 echo "  Configuring pm2 startup..."
 mkdir -p "$HOME/Library/LaunchAgents"
-pm2 startup 2>/dev/null || true
+echo ""
+echo "  ╔══════════════════════════════════════════════════════════╗"
+echo "  ║  pm2 startup will print a sudo command below.           ║"
+echo "  ║  Copy and run it to enable auto-start on boot.          ║"
+echo "  ╚══════════════════════════════════════════════════════════╝"
+echo ""
+pm2 startup || true
+echo ""
+echo "  After running the sudo command above, run: pm2 save"
 
 # ─── 8. cloudflared ───────────────────────────────────────────────
 echo "[8/9] Installing cloudflared..."

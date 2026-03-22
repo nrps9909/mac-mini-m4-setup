@@ -186,8 +186,9 @@ cloudflared tunnel route dns line-bot SUBDOMAIN.jesse-chen.com
 
 6. Install as service (launchd):
 ```bash
-cloudflared service install
+sudo cloudflared service install
 ```
+Note: `sudo` is required on macOS to install the LaunchAgent properly.
 
 7. Verify tunnel is running:
 ```bash
