@@ -209,6 +209,7 @@ fi
 
 # Setup pm2 startup (auto-start on boot)
 echo "  Configuring pm2 startup..."
+mkdir -p "$HOME/Library/LaunchAgents"
 pm2 startup 2>/dev/null || true
 
 # ─── 8. cloudflared ───────────────────────────────────────────────

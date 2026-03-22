@@ -104,19 +104,30 @@ echo '[ -f ~/.openclaw/.env ] && source ~/.openclaw/.env' >> ~/.zshrc
 
 ## Phase 4: Create LINE Bot
 
-Guide the user through LINE Developers Console:
+Guide the user through creating a LINE Bot. Since September 2024, the flow has changed:
+you must first create a LINE Official Account, then enable Messaging API on it.
 
-1. Go to https://developers.line.biz/
-2. Log in with LINE account (or create one)
-3. Create a new Provider (or use existing)
-4. Create a new **Messaging API** channel:
-   - Channel name: (user's choice)
-   - Channel description: (user's choice)
-   - Category: appropriate category
-   - Subcategory: appropriate subcategory
-5. In the channel settings, note down:
+**Step A: Create LINE Official Account (if not already done)**
+1. Go to https://manager.line.biz/
+2. Log in with LINE account
+3. Click "Create" to create a new Official Account
+   - Account name: (user's choice, e.g., their bot name)
+   - Company/Business: (user's choice)
+   - Complete the creation wizard
+
+**Step B: Enable Messaging API on the Official Account**
+1. In LINE Official Account Manager, go to: Settings > Messaging API
+2. Click "Enable Messaging API"
+3. Select or create a Provider
+4. Confirm to enable
+
+**Step C: Get credentials from LINE Developers Console**
+1. Go to https://developers.line.biz/console/
+2. Log in with LINE account
+3. The channel created in Step B should appear under your Provider
+4. In the channel settings, note down:
    - **Channel Secret** (Basic settings tab)
-   - **Channel Access Token** (Messaging API tab > Issue)
+   - **Channel Access Token** (Messaging API tab > Issue, click "Issue" to generate)
 
 Update `~/.openclaw/.env`:
 ```bash
