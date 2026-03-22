@@ -61,7 +61,7 @@ echo "  Done: basic tools"
 # ─── 2. Ollama ────────────────────────────────────────────────────
 echo "[2/9] Installing Ollama..."
 if ! command -v ollama &>/dev/null; then
-    brew install --cask ollama
+    brew install --cask ollama 2>/dev/null || brew install --cask ollama-app
     echo "  Done: Ollama installed"
 else
     echo "  Skip: Ollama already installed ($(ollama --version 2>/dev/null || echo 'unknown'))"
@@ -214,7 +214,8 @@ pm2 startup 2>/dev/null || true
 # ─── 8. cloudflared ───────────────────────────────────────────────
 echo "[8/9] Installing cloudflared..."
 if ! command -v cloudflared &>/dev/null; then
-    brew install cloudflared
+    brew tap cloudflare/cloudflare 2>/dev/null || true
+    brew install cloudflare/cloudflare/cloudflared 2>/dev/null || brew install cloudflared
     echo "  Done: cloudflared installed"
 else
     echo "  Skip: cloudflared already installed"
@@ -262,6 +263,8 @@ NEW_CRON="$EXISTING_CRON
 
 echo "$NEW_CRON" | crontab -
 echo "  Cron jobs installed (watchdog: every 2min, auto-update: Mon 3AM)"
+echo "  NOTE: On macOS Sequoia, cron requires Full Disk Access."
+echo "  Go to: System Settings > Privacy & Security > Full Disk Access > add /usr/sbin/cron"
 
 echo "  Done: templates deployed"
 

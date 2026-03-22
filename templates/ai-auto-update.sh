@@ -92,7 +92,7 @@ log "[2/4] Updating Ollama engine..."
 
 OLD_OLLAMA_VER=$(ollama --version 2>/dev/null | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' || echo "unknown")
 
-if brew upgrade --cask ollama > /dev/null 2>&1; then
+if brew upgrade --cask ollama 2>/dev/null || brew upgrade --cask ollama-app 2>/dev/null; then
     NEW_OLLAMA_VER=$(ollama --version 2>/dev/null | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' || echo "unknown")
     if [ "$OLD_OLLAMA_VER" != "$NEW_OLLAMA_VER" ]; then
         log "  Ollama updated ($OLD_OLLAMA_VER -> $NEW_OLLAMA_VER)"
@@ -141,7 +141,7 @@ if curl -sf --max-time 10 "$OLLAMA_HOST/api/tags" > /dev/null 2>&1; then
     log "  Ollama: OK"
 else
     log "  Ollama: FAILED"
-    brew services restart ollama 2>/dev/null
+    pkill -x Ollama 2>/dev/null; sleep 2; open -a Ollama
     HEALTH_OK=false
 fi
 

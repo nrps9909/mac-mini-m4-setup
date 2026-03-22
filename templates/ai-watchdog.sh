@@ -14,7 +14,7 @@ fi
 check_ollama() {
     if ! curl -sf --max-time 10 http://localhost:11434/api/tags > /dev/null 2>&1; then
         echo "$(date '+%Y-%m-%d %H:%M:%S') WARN: Ollama is down, restarting" >> "$LOG"
-        brew services restart ollama
+        pkill -x Ollama 2>/dev/null; sleep 2; open -a Ollama
         echo "$(date '+%Y-%m-%d %H:%M:%S') INFO: Ollama restarted" >> "$LOG"
     fi
 }
